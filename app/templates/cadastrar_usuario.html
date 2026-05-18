@@ -1,0 +1,32 @@
+<!-- Dizemos ao Flask para usar o nosso esqueleto base -->
+{% extends "base.html" %}
+
+<!-- Tudo que estiver dentro deste bloco vai parar lá no miolo do base.html -->
+{% block conteudo %}
+    <h2>Criar Nova Conta</h2>
+
+    <!-- O method="POST" é o que faz o navegador enviar os dados escondidos, lembra? -->
+    <form method="POST" action="/cadastrar-usuario">
+        
+        <div>
+            <label>Nome Completo:</label><br>
+            <!-- O name="nome" é fundamental para o request.form.get('nome') no Python -->
+            <input type="text" name="nome" required>
+        </div>
+        <br>
+
+        <div>
+            <label>E-mail:</label><br>
+            <input type="email" name="email" required>
+        </div>
+        <br>
+
+        <div>
+            <label>Senha:</label><br>
+            <input type="password" name="senha" required>
+        </div>
+        <br>
+
+        <button type="submit">Finalizar Cadastro</button>
+    </form>
+{% endblock %}

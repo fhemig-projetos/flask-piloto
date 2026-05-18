@@ -85,3 +85,6 @@ O modelo `Usuario` possui os seguintes campos:
 
 - A chave secreta está definida em `app/__init__.py` como placeholder (`'sua_chave_secreta_aqui'`). Substitua por um valor seguro em produção.
 - A aplicação atual é uma base para desenvolvimento e demonstração; as rotas atuais retornam apenas texto simples.
+
+# Melhorias
+- utilização de blueprints para criação das rotas

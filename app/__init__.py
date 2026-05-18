@@ -3,9 +3,11 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 
 db = SQLAlchemy()
 migrate = Migrate()
+login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
@@ -20,17 +22,16 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app, db)
+    login_manager.init_app(app)
+    login_manager.login_view = 'login'
 
     from app.models import Usuario
+    from app.routes import init_routes
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return Usuario.query.get(int(user_id))
     
-    # Rotas de exemplo
-    @app.route('/')
-    def home():
-        return 'Tela inicial!'
-
-    @app.route('/mostrar_dados')
-    def mostrar_dados():
-        return 'Nesta tela serão mostrados os dados do banco de dados'
-
-
+    init_routes(app)
+    
     return app
