@@ -1,6 +1,6 @@
 # Flask Piloto
 
-Projeto piloto em Flask com SQLAlchemy e Flask-Migrate, usando SQLite como banco de dados local.
+Projeto piloto em Flask com SQLAlchemy, Flask-Migrate e banco de dados SQLite3.
 
 ## Visão geral
 
@@ -8,14 +8,15 @@ Projeto piloto em Flask com SQLAlchemy e Flask-Migrate, usando SQLite como banco
 - Modelo de usuário em `app/models/usuario.py`
 - Migrações gerenciadas por Flask-Migrate em `migrations/`
 - Ponto de entrada em `run.py`
+- Banco de dados local SQLite armazenado em `app/app.db`
 
 ## Estrutura do projeto
 
 - `run.py` - inicializa a aplicação Flask
-- `app/__init__.py` - cria a app, configura SQLAlchemy e Flask-Migrate, e define rotas básicas
+- `app/__init__.py` - cria a app, configura SQLAlchemy e Flask-Migrate e define rotas básicas
 - `app/models/usuario.py` - modelo `Usuario` com campos `id`, `nome`, `email` e `senha`
+- `app/routes/` - definem rotas e páginas do sistema
 - `migrations/` - arquivos de migração do banco de dados
-- `app/app.db` - banco de dados SQLite local
 
 ## Requisitos
 
@@ -23,6 +24,7 @@ Projeto piloto em Flask com SQLAlchemy e Flask-Migrate, usando SQLite como banco
 - Flask
 - Flask-SQLAlchemy
 - Flask-Migrate
+- SQLite3
 
 ## Instalação
 
@@ -36,7 +38,17 @@ source venv/bin/activate
 2. Instale as dependências:
 
 ```bash
-pip install flask flask_sqlalchemy flask_migrate
+pip install -r requirements.txt
+```
+
+## Banco de dados SQLite3
+
+O projeto utiliza SQLite3 para o banco de dados local. O arquivo do banco é `app/app.db`.
+
+Você pode inspecionar o banco diretamente com o cliente SQLite:
+
+```bash
+sqlite3 app/app.db
 ```
 
 ## Executando a aplicação
@@ -47,22 +59,28 @@ pip install flask flask_sqlalchemy flask_migrate
 source venv/bin/activate
 ```
 
-2. Execute o aplicativo:
+2. Defina a variável de ambiente do Flask:
+
+```bash
+export FLASK_APP=run.py
+```
+
+3. Execute o aplicativo:
 
 ```bash
 python run.py
 ```
 
-3. Acesse no navegador:
+4. Acesse no navegador:
 
-- `http://127.0.0.1:5000/` para a página inicial
-- `http://127.0.0.1:5000/mostrar_dados` para a rota de demonstração
+- `http://127.0.0.1:5000/` - página inicial
+- `http://127.0.0.1:5000/mostrar-dados` - página de demonstração
+- `http://127.0.0.1:5000/cadastrar-usuario` - cadastro de usuário
+- `http://127.0.0.1:5000/login` - página de login
 
-## Banco de dados e migrações
+## Migrações
 
-O projeto usa SQLite e mantém o arquivo local em `app/app.db`.
-
-Para criar ou aplicar migrações:
+Se precisar criar ou atualizar o banco de dados:
 
 ```bash
 flask db init      # somente se ainda não houver migrations/
@@ -70,7 +88,7 @@ flask db migrate -m "mensagem"
 flask db upgrade
 ```
 
-> Observação: Se estiver usando `flask` via ambiente virtual, defina a variável `FLASK_APP=run.py` antes de executar os comandos de migração.
+> Observação: quando usar `flask`, certifique-se de ter ativado o ambiente virtual e definido `FLASK_APP=run.py`.
 
 ## Modelo `Usuario`
 
@@ -84,7 +102,11 @@ O modelo `Usuario` possui os seguintes campos:
 ## Notas
 
 - A chave secreta está definida em `app/__init__.py` como placeholder (`'sua_chave_secreta_aqui'`). Substitua por um valor seguro em produção.
-- A aplicação atual é uma base para desenvolvimento e demonstração; as rotas atuais retornam apenas texto simples.
+- A aplicação atual é uma base para desenvolvimento e demonstração; as rotas atuais retornam texto ou templates.
 
-# Melhorias
-- utilização de blueprints para criação das rotas
+## Melhorias
+
+- Uso de blueprints para organização das rotas, separando módulos por funcionalidade
+- Validação e tratamento de formulários com Flask-WTF
+- Implementar autenticação completa com `flask_login`
+- Melhorar a segurança e o hash de senhas com `werkzeug.security` ou `bcrypt`
