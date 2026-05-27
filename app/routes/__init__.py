@@ -1,1 +1,2 @@
-from .routes import init_routes
+from .auth import auth_bp
+from .main import main_bp

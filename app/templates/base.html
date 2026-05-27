@@ -15,6 +15,20 @@
 
     <hr>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for categoria, mensagem in messages %}
+          {% if categoria == 'erro' %}
+            <p style="color: red; font-weight: bold;">❌ {{ mensagem }}</p>
+          {% elif categoria == 'sucesso' %}
+            <p style="color: green; font-weight: bold;">✅ {{ mensagem }}</p>
+          {% else %}
+            <p style="color: blue;">ℹ️ {{ mensagem }}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
     <!-- O conteúdo de cada página será injetado aqui dentro -->
     <main>
         {% block conteudo %}

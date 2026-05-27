@@ -3,30 +3,40 @@
 
 <!-- Tudo que estiver dentro deste bloco vai parar lá no miolo do base.html -->
 {% block conteudo %}
-    <h2>Criar Nova Conta</h2>
+<h2>Criar Nova Conta</h2>
 
-    <!-- O method="POST" é o que faz o navegador enviar os dados escondidos, lembra? -->
-    <form method="POST" action="/cadastrar-usuario">
+    <form method="POST" action="" novalidate>
+        {{ form.hidden_tag() }}
         
         <div>
-            <label>Nome Completo:</label><br>
-            <!-- O name="nome" é fundamental para o request.form.get('nome') no Python -->
-            <input type="text" name="nome" required>
+            {{ form.nome.label }}<br>
+            {{ form.nome() }}
+            {% for erro in form.nome.errors %} <span style="color: red;">[{{ erro }}]</span> {% endfor %}
         </div>
         <br>
 
         <div>
-            <label>E-mail:</label><br>
-            <input type="email" name="email" required>
+            {{ form.email.label }}<br>
+            {{ form.email() }}
+            {% for erro in form.email.errors %} <span style="color: red;">[{{ erro }}]</span> {% endfor %}
         </div>
         <br>
 
         <div>
-            <label>Senha:</label><br>
-            <input type="password" name="senha" required>
+            {{ form.senha.label }}<br>
+            {{ form.senha() }}
+            {% for erro in form.senha.errors %} <span style="color: red;">[{{ erro }}]</span> {% endfor %}
+        </div>
+        <br>
+        
+        <div>
+            {{ form.confirmacao_senha.label }}<br>
+            {{ form.confirmacao_senha() }}
+            {% for erro in form.confirmacao_senha.errors %} <span style="color: red;">[{{ erro }}]</span> {% endfor %}
         </div>
         <br>
 
-        <button type="submit">Finalizar Cadastro</button>
+        {{ form.submit() }}
     </form>
+    
 {% endblock %}
