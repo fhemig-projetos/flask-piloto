@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from app.forms import RegistroForm
+from flask_login import login_user, logout_user, current_user, login_required
+
+from app.forms import RegistroForm, LoginForm
 from app.models import Usuario
 from app.extensions import db
 
@@ -30,6 +32,34 @@ def cadastrar_usuario():
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == "POST":
-        pass
-    return render_template("login.html")
+    if current_user.is_authenticated:
+        return redirect(url_for("main.home"))
+    
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        query = db.select(Usuario).where(Usuario.email == form.email.data)
+        usuario : Usuario = db.session.scalar(query)
+
+        if usuario and usuario.check_senha(form.senha.data):
+            login_user(usuario)
+            flash("Login realizado com sucesso!", "sucesso")
+
+            proxima_pagina = request.args.get("next")
+
+            if proxima_pagina:
+                return redirect(proxima_pagina)
+            else:
+                return redirect(url_for("main.home"))
+
+        else: 
+            flash('E-mail ou senha incorretos. Tente novamente.', 'erro')
+
+    return render_template("login.html", form=form)
+    
+@auth_bp.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash("Você saiu do sistema", "sucesso")
+    return redirect(url_for("auth.login"))

@@ -3,19 +3,25 @@
 {% block conteudo %}
     <h2>Acessar o Sistema</h2>
 
-    <form method="POST" action="/login">
+<form method="POST" action="" novalidate>
+        {{ form.hidden_tag() }}
+        
         <div>
-            <label>E-mail:</label><br>
-            <input type="email" name="email" required>
+            {{ form.email.label }}<br>
+            {{ form.email() }}
+            {% for erro in form.email.errors %} <span style="color: red;">[{{ erro }}]</span> {% endfor %}
         </div>
         <br>
 
         <div>
-            <label>Senha:</label><br>
-            <input type="password" name="senha" required>
+            {{ form.senha.label }}<br>
+            {{ form.senha() }}
+            {% for erro in form.senha.errors %} <span style="color: red;">[{{ erro }}]</span> {% endfor %}
         </div>
         <br>
 
-        <button type="submit">Entrar</button>
+        {{ form.submit() }}
     </form>
+
+    <p>Ainda não tem uma conta? <a href="{{ url_for('auth.cadastrar_usuario') }}">Cadastre-se aqui</a>.</p>
 {% endblock %}

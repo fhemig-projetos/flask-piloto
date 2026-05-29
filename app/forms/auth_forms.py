@@ -29,3 +29,15 @@ class RegistroForm(FlaskForm):
         ],
     )
     submit = SubmitField("Finalizar Cadastro")
+
+class LoginForm(FlaskForm):
+    email = StringField('E-mail', validators=[
+        DataRequired(message="O e-mail é obrigatório."),
+        Email(message="Digite um e-mail válido.")
+    ])
+    
+    senha = PasswordField('Senha', validators=[
+        DataRequired(message="A senha é obrigatória.")
+    ])
+    
+    submit = SubmitField('Entrar no Sistema')

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+    <h2>Bem-vindo(a), {{ current_user.nome }}! 👋</h2>
+    
+    <p>Este é o painel principal do seu Simulador de Aposentadoria.</p>
+    <p>Você está acessando o sistema com o e-mail: <strong>{{ current_user.email }}</strong>.</p>
+    <hr>
+
+    <p>Aqui em breve teremos os gráficos e formulários da sua simulação financeira!</p>
+</div>
+{% endblock %}

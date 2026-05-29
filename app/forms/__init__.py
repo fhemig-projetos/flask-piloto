@@ -1,1 +1,1 @@
-from .auth_forms import RegistroForm
+from .auth_forms import RegistroForm, LoginForm

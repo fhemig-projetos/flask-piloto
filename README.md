@@ -104,9 +104,19 @@ O modelo `Usuario` possui os seguintes campos:
 - A chave secreta está definida em `app/__init__.py` como placeholder (`'sua_chave_secreta_aqui'`). Substitua por um valor seguro em produção.
 - A aplicação atual é uma base para desenvolvimento e demonstração; as rotas atuais retornam texto ou templates.
 
-## Melhorias
+# Melhorias
 
-- Uso de blueprints para organização das rotas, separando módulos por funcionalidade
-- Validação e tratamento de formulários com Flask-WTF
-- Implementar autenticação completa com `flask_login`
-- Melhorar a segurança e o hash de senhas com `werkzeug.security` ou `bcrypt`
+## Sistema de login e autenticação inicial  
+- [ ] Uso de blueprints para organização das rotas, separando módulos por funcionalidade
+- [ ] Validação e tratamento de formulários com Flask-WTF
+- [ ] Implementar autenticação completa com `flask_login`
+- [ ] Melhorar a segurança e o hash de senhas com `werkzeug.security` ou `bcrypt`
+
+## Criação do formulário inicial e mapeamento das regras de negócio de cálculos
+A fundação da aplicação (Arquitetura, Banco de Dados, Autenticação e Segurança) está concluída. A próxima fase foca na construção do motor do Simulador de Aposentadoria em si:
+
+- [ ] **Integração da Base Cadastral (Dependência):** Importar a base de dados consolidada dos servidores (Responsável pela extração: Izabella).
+- [ ] **Modelagem do Banco da Simulação:** Criar a tabela e as variáveis necessárias no banco de dados para salvar o progresso das simulações de cada usuário.
+- [ ] **Interface de Simulação:** Construir o formulário de entrada das variáveis financeiras, previdenciárias e de tempo de serviço.
+- [ ] **Preenchimento Inteligente (Auto-fill):** Desenvolver a lógica em Python para buscar e preencher automaticamente os dados cadastrais e o histórico do servidor no formulário (buscando na base consolidada da Izabella) para reduzir o trabalho manual.
+- [ ] **Motor Matemático:** Implementar as funções que calculam e projetam a evolução da aposentadoria.
