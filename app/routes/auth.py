@@ -30,6 +30,7 @@ def cadastrar_usuario():
     
     return render_template("cadastrar_usuario.html", form=form)
 
+@auth_bp.route("/", methods=["GET", "POST"])
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:

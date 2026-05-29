@@ -111,6 +111,7 @@ O modelo `Usuario` possui os seguintes campos:
 - [ ] Validação e tratamento de formulários com Flask-WTF
 - [ ] Implementar autenticação completa com `flask_login`
 - [ ] Melhorar a segurança e o hash de senhas com `werkzeug.security` ou `bcrypt`
+- [ ] Elaborar lógica de reset de senha
 
 ## Criação do formulário inicial e mapeamento das regras de negócio de cálculos
 A fundação da aplicação (Arquitetura, Banco de Dados, Autenticação e Segurança) está concluída. A próxima fase foca na construção do motor do Simulador de Aposentadoria em si:
