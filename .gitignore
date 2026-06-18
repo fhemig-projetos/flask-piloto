@@ -54,9 +54,6 @@ instance/
 *.db
 *.sqlite3
 
-# Migrations
-migrations/versions/
-
 # PyCharm
 .idea/
 
@@ -81,3 +78,11 @@ migrations/versions/
 # Misc
 *.swp
 *~
+
+# Data / Planilhas Sensíveis (LGPD)
+data/
+*.csv
+*.xlsx
+
+# Jupyter Notebooks (caso você use para testar o Pandas depois)
+.ipynb_checkpoints

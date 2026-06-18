@@ -12,7 +12,7 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
 
-    from app.models import Usuario
+    from app.models import Usuario, DadoFuncional
 
     @login_manager.user_loader
     def load_user(user_id):
